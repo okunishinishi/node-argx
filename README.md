@@ -47,7 +47,7 @@ API
 -----
 
 | Signature | Description |
-| --- | --- | |
+| --- | --- | --- |
 | .pop() | Pop a argument value from last. |
 | .pop(2) | Pop multiple values from last. Orders are preserved. |
 | .pop('function') | Pop only if the last value conform the type. |
