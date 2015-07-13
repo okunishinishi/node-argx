@@ -21,12 +21,6 @@ Usage
 
 var argx = require('argx');
 
-/**
- * Do something thing with variadic arguments
- * @param {...string} values - Variable length values.
- * @param {object} [options] - Optional settings.
- * @param {function} [callback] - Callback when done.
- */
 function doSomething(values, options, callback) {
     var args = argx(arguments);
     callback = args.pop('function') || function noop(){};
@@ -63,6 +57,13 @@ API
 | .shift('function') | Shift only if the top value conform the type. |
 | .shift(3, 'function') | Shift values while conforming the type. |
 | .remain() | Shift all remained values. |
+
+
+License
+-------
+This software is released under the [MIT License][my_license_url].
+
+
 
 <!-- Links start -->
 
