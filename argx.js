@@ -106,4 +106,11 @@ function argx(args) {
     return new Argx(args);
 }
 
+/**
+ * Function to do nothing.
+ */
+argx.noop = function noop() {
+    // Do nothing.
+};
+
 module.exports = argx;

@@ -16,23 +16,24 @@ Usage
 
 ```javascript
 /**
- * This an example to declare an variadic functions
+ * This an example to declare an variadic functions.
  */
 
 var argx = require('argx');
 
 function doSomething(values, options, callback) {
     var args = argx(arguments);
-    callback = args.pop('function') || function noop(){};
-    options = args.pop('object') || {};
-    values = args.remain();
+    callback = args.pop('function') || function noop(){}; // Consume last argument if it's a function. 
+    options = args.pop('object') || {}; // Consume last argument if it's an object. 
+    values = args.remain(); // Get remaining arguments as array.
     /*...*/
 }
 
-
 doSomething('foo', 'bar');
 doSomething('foo', 'bar', {verbose:true});
+doSomething('foo', 'bar', function(err){});
 doSomething('foo', 'bar', {verbose:true}, function(err){});
+
 ```
 
 
@@ -46,6 +47,8 @@ npm install argx --save
 API
 -----
 
+API guide for Argx instance, returned by `argx(arguments)`.
+
 | Signature | Description |
 | --- | --- | --- |
 | .pop() | Pop a argument value from last. |
@@ -56,7 +59,15 @@ API
 | .shift(2) | Shift multiple values from top. |
 | .shift('function') | Shift only if the top value conform the type. |
 | .shift(3, 'function') | Shift values while conforming the type. |
-| .remain() | Shift all remained values. |
+| .remain() | Shift all remained values. Always returns an array. |
+
+Note that .pop()/.shift() methods returns values as array only if multiple hits.
+If you want to make sure to keep values as array, use `[].concat()`.
+
+```javascript
+var args = argx(arguments);
+var values = [].concat(args.pop(2,'string')) // Always array.
+``
 
 
 License
