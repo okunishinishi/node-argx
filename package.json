@@ -1,8 +1,8 @@
 {
   "name": "argx",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Parse function arguments. Useful to implement variadic functions.",
-  "main": "index.js",
+  "main": "argx.js",
   "scripts": {
     "test": "nodeunit argx_test.js",
     "cover": "istanbul cover nodeunit argx_test.js --dir coverage",
