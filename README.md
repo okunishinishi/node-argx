@@ -50,7 +50,7 @@ API
 API guide for Argx instance, returned by `argx(arguments)`.
 
 | Signature | Description |
-| --- | --- | --- |
+| ----- | ----- | 
 | .pop() | Pop a argument value from last. |
 | .pop(2) | Pop multiple values from last. Orders are preserved. |
 | .pop('function') | Pop only if the last value conform the type. |
@@ -61,13 +61,13 @@ API guide for Argx instance, returned by `argx(arguments)`.
 | .shift(3, 'function') | Shift values while conforming the type. |
 | .remain() | Shift all remained values. Always returns an array. |
 
-Note that .pop()/.shift() methods returns values as array only if multiple hits.
+Note that `.pop()`/`.shift()` methods returns values as array only if multiple hits.
 If you want to make sure to keep values as array, use `[].concat()`.
 
 ```javascript
 var args = argx(arguments);
 var values = [].concat(args.pop(2,'string')) // Always array.
-``
+```
 
 
 License
@@ -101,4 +101,4 @@ This software is released under the [MIT License][my_license_url].
 [my_tag_url]: http://github.com/okunishinishi/node-argx/releases/tag/
 [my_tag_badge_url]: http://img.shields.io/github/tag/okunishinishi/node-argx.svg?style=flat
 
-<!-- Links end-->
+<!-- Links end -->
