@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nodeunit argx_test.js",
     "cover": "istanbul cover nodeunit argx_test.js --dir coverage",
-    "report": "coveralls  < coverage/lcov.info",
+    "report": "codeclimate-test-reporter  < coverage/lcov.info",
     "versionup": "versionup",
     "taggit": "taggit"
   },
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "devDependencies": {
-    "coveralls": "^2.11.2",
+    "codeclimate-test-reporter": "0.1.0",
     "coz": "^1.0.25",
     "istanbul": "^0.3.17",
     "nodeunit": "^0.9.1",
