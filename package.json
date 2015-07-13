@@ -1,0 +1,40 @@
+{
+  "name": "argx",
+  "version": "1.0.0",
+  "description": "Parse function arguments. Useful to implement variadic functions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit argx_test.js",
+    "cover": "istanbul cover nodeunit argx_test.js --dir coverage",
+    "report": "coveralls  < coverage/lcov.info",
+    "versionup": "versionup",
+    "taggit": "taggit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okunishinishi/node-argx.git"
+  },
+  "keywords": [
+    "function",
+    "arguments",
+    "variadic",
+    "simple"
+  ],
+  "author": {
+    "name": "Taka Okunishi",
+    "url": "http://okunishitaka.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okunishinishi/node-argx/issues"
+  },
+  "homepage": "https://github.com/okunishinishi/node-argx#readme",
+  "devDependencies": {
+    "coveralls": "^2.11.2",
+    "coz": "^1.0.25",
+    "istanbul": "^0.3.17",
+    "nodeunit": "^0.9.1",
+    "taggit": "^1.0.3",
+    "versionup": "^1.0.7"
+  }
+}
