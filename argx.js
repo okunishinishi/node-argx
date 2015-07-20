@@ -65,7 +65,7 @@ Argx.prototype = {
      * Pop values
      * @param {number|string} [howmany=1] - Number of value to get.
      * @param {string} [type] - Type restriction.
-     * @returns {*} - Value.
+     * @returns {*} - Value. Array if multpile hits.
      */
     pop: function (howmany, type) {
         var s = this;
@@ -76,10 +76,10 @@ Argx.prototype = {
         return s._splice(from, howmany, type);
     },
     /**
-     * Pop values
+     * Shift values
      * @param {number|string} [howmany=1] - Number of value to get.
      * @param {string} [type] - Type restriction.
-     * @returns {*} - Value.
+     * @returns {*} - Value. Array if multpile hits.
      */
     shift: function (howmany, type) {
         var s = this;

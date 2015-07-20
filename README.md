@@ -13,6 +13,7 @@ Parse function arguments. Useful to implement variadic functions.
 Usage
 -----
 
+Pass the `arguments` object to `.argx()` inside your function.
 
 ```javascript
 /**
@@ -44,18 +45,18 @@ Installation
 npm install argx --save
 ```
 
-API
+API Guide
 -----
 
-API guide for Argx instance, returned by `argx(arguments)`.
+API guide for Argx instance, which is returned by `argx(arguments)`.
 
 | Signature | Description |
 | ----- | ----- | 
-| .pop() | Pop a argument value from last. |
+| .pop() | Pop an argument value from last. |
 | .pop(2) | Pop multiple values from last. Orders are preserved. |
 | .pop('function') | Pop only if the last value conform the type. |
 | .pop(3, 'function') | Pop values while conforming the type. |
-| .shift() | Shift a argument value from top. |
+| .shift() | Shift an argument value from top. |
 | .shift(2) | Shift multiple values from top. |
 | .shift('function') | Shift only if the top value conform the type. |
 | .shift(3, 'function') | Shift values while conforming the type. |
@@ -66,7 +67,7 @@ If you want to make sure to keep values as array, use `[].concat()`.
 
 ```javascript
 var args = argx(arguments);
-var values = [].concat(args.pop(2,'string')) // Always array.
+var values = [].concat(args.pop(2, 'string') || []); // Always array.
 ```
 
 
