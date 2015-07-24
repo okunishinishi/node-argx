@@ -10,9 +10,9 @@ read -p ">> " answer
 
 case ${answer:0:1} in
     y|Y )
-        npm run versionup
         npm run taggit
         npm publish .
+        npm run versionup
         git add . -A
         git commit -m 'Version up '
         git push
