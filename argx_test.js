@@ -39,7 +39,6 @@ exports['Pop arguments.'] = function (test) {
         test.ok(args.remain().length, 2);
     })('v1', 'v2', 'v3', 'v4', 'v5');
 
-
     test.done();
 };
 
@@ -160,6 +159,31 @@ exports['Check type.'] = function (test) {
 
 
     })();
+    test.done();
+};
+
+exports['Hit with multiple type.'] = function (test) {
+    function MyFunc() {
+    }
+
+    (function () {
+        var args = argx(arguments);
+        test.equal(args._typeHits("foo", "string|number"), true);
+        test.equal(args._typeHits("foo", "string|function"), true);
+        test.equal(args._typeHits("foo", "function|number"), false);
+        test.equal(args._typeHits("foo", ["string", "number"]), true);
+        test.equal(args._typeHits("foo", ["string", "function"]), true);
+        test.equal(args._typeHits("foo", ["function", "number"]), false);
+        test.equal(args._typeHits(new MyFunc, [MyFunc, "number"]), true);
+
+        test.ok(!args.pop('string|number'));
+        test.ok(!args.pop(['string', 'number']));
+        test.ok(!!args.pop([MyFunc, 'number']));
+        test.ok(!args.shift([MyFunc, 'number']));
+        test.ok(!!args.shift(['string', 'number']));
+        test.ok(!!args.shift('string|number'));
+
+    })('v1', 'v2', new MyFunc);
     test.done();
 };
 

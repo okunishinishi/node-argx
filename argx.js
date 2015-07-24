@@ -20,7 +20,7 @@ Argx.prototype = {
     /**
      * Detect if type hits.
      * @param {*} value - Value to check with.
-     * @param {string|name} type - Type to check with.
+     * @param {string|object|string[]|object[]} type - Type to check with.
      * @returns {boolean} - Hit or not.
      * @private
      */
@@ -29,8 +29,16 @@ Argx.prototype = {
         if (isEmpty) {
             return false;
         }
+        var s = this;
+        var isArray = Array.isArray(type);
+        if (isArray) {
+            return s._anyTypeHits(value, type);
+        }
         switch (typeof(type)) {
             case 'string':
+                if (/\|/.test(type)) {
+                    return s._anyTypeHits(value, type.split(/\|/g));
+                }
                 return typeof(value) === type;
             case 'function':
                 return value instanceof(type);
@@ -39,6 +47,24 @@ Argx.prototype = {
             default:
                 return false;
         }
+    },
+    /**
+     * Detect if any of type hits.
+     * @param {*} value - Value to check with.
+     * @param {string[]|object[]} types - types to check.
+     * @returns {boolean} - Hit or not.
+     * @private
+     */
+    _anyTypeHits: function (value, types) {
+        var s = this;
+        for (var i = 0, len = types.length; i < len; i++) {
+            var type = types[i];
+            var hit = s._typeHits(value, type);
+            if (hit) {
+                return true;
+            }
+        }
+        return false;
     },
     /**
      * Splice argument values.

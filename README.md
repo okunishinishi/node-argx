@@ -54,11 +54,11 @@ API guide for Argx instance, which is returned by `argx(arguments)`.
 | ----- | ----- | --- |
 | .pop() | Pop an argument value from last. | `args.pop()` |
 | .pop(count) | Pop multiple values from last. Orders are preserved. | `args.pop(1)` |
-| .pop(type) | Pop only if the last value conform the type. | `args.pop("number")` <br/> `args.pop(CustomObj)` |
+| .pop(type) | Pop only if the last value conform the type. | `args.pop("number")` <br/> `args.pop("number|string")` <br/> `args.pop(CustomObj)` |
 | .pop(count, type) | Pop values while conforming the type. | `args.pop(2, "number")` <br/> `args.pop(1, CustomObj)` |
 | .shift() | Shift an argument value from top. | `args.shift()` |
 | .shift(count) | Shift multiple values from top. | `args.shift(2)` |
-| .shift(type) | Shift only if the top value conform the type. | `args.shift("string")` <br/> `args.shift(CustomObj)` |
+| .shift(type) | Shift only if the top value conform the type. | `args.shift("string")` <br/> `args.pop("object|string")` <br/> `args.shift(CustomObj)` |
 | .shift(count, type) | Shift values while conforming the type. | `args.shift(2, "string")` <br/> `args.shift(4, CustomObj)` |
 | .remain() | Shift all remained values. Always returns an array. | `args.remain()` |
 
@@ -66,10 +66,9 @@ API guide for Argx instance, which is returned by `argx(arguments)`.
 Tips
 -----
 
-### Detecting Custom types.
+### Detecting Custom Types.
 
 Type which `.pop()`/`.shift()` accept is string, a custom object or a custom constructor.
- 
  
 ```javascript
 function MyConstructor(){/*...*/};
@@ -78,6 +77,14 @@ args.pop(MyConstructor); // Pop only if the last argument is instantiate by `new
 var MyObj = {/*...*/};
 args.pop(MyObj); // Pop only if the last argument is create by `Object.create(MyObj)`
 ```
+
+### Specify Multiple Types
+
+There two ways to specify 'or' condition for types.
+
+1. Pass string with "|" (eg: `args.pop('string|number');` )
+2. Pass array as type (eg: `args.pop(['string', MyCustomObj]);` )
+
 
 ### Want Array Always
 
