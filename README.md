@@ -80,10 +80,10 @@ args.pop(MyObj); // Pop only if the last argument is create by `Object.create(My
 
 ### Specify Multiple Types
 
-There two ways to specify 'or' condition for types.
+There are two ways to specify 'or' condition for types.
 
-1. Pass string with "|" (eg: `args.pop('string|number');` )
-2. Pass array as type (eg: `args.pop(['string', MyCustomObj]);` )
+1. Passing string joined by "|" (eg: `args.pop('string|number');` )
+2. Passing array as type (eg: `args.pop(['string', MyCustomObj]);` )
 
 
 ### Want Array Always
