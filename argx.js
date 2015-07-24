@@ -18,15 +18,39 @@ function Argx(args) {
 
 Argx.prototype = {
     /**
+     * Detect if type hits.
+     * @param {*} value - Value to check with.
+     * @param {string|name} type - Type to check with.
+     * @returns {boolean} - Hit or not.
+     * @private
+     */
+    _typeHits: function (value, type) {
+        var isEmpty = (typeof(value) === 'undefined') || (value === null);
+        if (isEmpty) {
+            return false;
+        }
+        switch (typeof(type)) {
+            case 'string':
+                return typeof(value) === type;
+            case 'function':
+                return value instanceof(type);
+            case 'object':
+                return !!(type && type.isPrototypeOf) && type.isPrototypeOf(value);
+            default:
+                return false;
+        }
+    },
+    /**
      * Splice argument values.
      * @param {number} start - Where to start
      * @param {number} [howmany=1] - Number of value to get.
      * @param {string} [type] - Type restriction.
+     * @private
      */
     _splice: function (start, howmany, type) {
         var s = this;
 
-        if (typeof(arguments[1]) === 'string') {
+        if (typeof(arguments[1]) !== 'number') {
             if (isNaN(Number(arguments[1]))) {
                 type = arguments[1];
                 howmany = 1;
@@ -41,7 +65,7 @@ Argx.prototype = {
         }
         var result;
         for (var i = start; i < (start + howmany); i++) {
-            var skipByType = type && (typeof(s.values[i]) !== type);
+            var skipByType = type && !s._typeHits(s.values[i], type);
             if (skipByType) {
                 break;
             }
@@ -64,8 +88,16 @@ Argx.prototype = {
     /**
      * Pop values
      * @param {number|string} [howmany=1] - Number of value to get.
-     * @param {string} [type] - Type restriction.
-     * @returns {*} - Value. Array if multpile hits.
+     * @param {string|function} [type] - Type restriction. Could be a name of type or a constructor.
+     * @returns {*} - Value. Array if multiple hits.
+     * @example
+     *  function doSomething() {
+     *      var args = argx(arguments);
+     *      args.pop();
+     *      args.pop(2);
+     *      args.pop('string')
+     *      args.pop(MyCustomError);
+     *  }
      */
     pop: function (howmany, type) {
         var s = this;
@@ -78,8 +110,16 @@ Argx.prototype = {
     /**
      * Shift values
      * @param {number|string} [howmany=1] - Number of value to get.
-     * @param {string} [type] - Type restriction.
-     * @returns {*} - Value. Array if multpile hits.
+     * @param {string} [type] - Type restriction. Could be a name of type or a constructor.
+     * @returns {*} - Value. Array if multiple hits.
+     * @example
+     *  function doSomething() {
+     *      var args = argx(arguments);
+     *      args.shift();
+     *      args.shift(2);
+     *      args.shift('string')
+     *      args.shift(MyCustomError);
+     *  }
      */
     shift: function (howmany, type) {
         var s = this;
