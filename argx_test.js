@@ -36,7 +36,7 @@ exports['Pop arguments.'] = function (test) {
     (function foo4() {
         var args = argx(arguments);
         test.deepEqual(args.pop(2), ["v4", "v5"]);
-        test.ok(args.remain().length, 2);
+        test.deepEqual(args.remain(), ['v1', 'v2', 'v3']);
     })('v1', 'v2', 'v3', 'v4', 'v5');
 
     test.done();
@@ -47,7 +47,7 @@ exports['Shift arguments.'] = function (test) {
         var args = argx(arguments);
         test.deepEqual(args.shift(2), ['v1', 'v2']);
         test.equal(args.shift(1, 'function'), undefined);
-        test.equal(args.remain().length, 2);
+        test.deepEqual(args.remain(), [{}, noop]);
         test.equal(args.shift(), undefined);
         test.equal(args.shift(124), undefined);
     })('v1', 'v2', {}, noop);
@@ -55,7 +55,7 @@ exports['Shift arguments.'] = function (test) {
     (function foo2() {
         var args = argx(arguments);
         test.deepEqual(args.shift(2), ['v1', 'v2']);
-        test.ok(args.remain().length, 2);
+        test.deepEqual(args.remain(), ['v3', 'v4', 'v5']);
     })('v1', 'v2', 'v3', 'v4', 'v5');
 
     test.done();
@@ -238,12 +238,12 @@ exports['Check is number.'] = function (test) {
 exports['Handle array.'] = function (test) {
     (function () {
         var args = argx(arguments);
-        test.ok(!args.pop('string'));
-        test.ok(!args.pop([]));
-        test.ok(args.pop('array'));
-        test.ok(!args.pop([]));
-        test.ok(!args.pop('string'));
-        test.ok(args.pop(Array));
+        test.equal(args.pop('string'), undefined);
+        test.equal(args.pop([]), undefined);
+        test.deepEqual(args.pop('array'), ['v5', 'v6']);
+        test.equal(args.pop([]), undefined);
+        test.equal(args.pop('string'), undefined);
+        test.deepEqual(args.pop(Array), ['v4', 'v5']);
     })(
         'v1',
         'v2',
