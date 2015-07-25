@@ -18,6 +18,29 @@ function Argx(args) {
 
 Argx.prototype = {
     /**
+     * Parse a type.
+     * @param {string|object|function} type - Type to parse.
+     * @private
+     */
+    _parseType: function (type) {
+        if (type === Function) {
+            return 'function';
+        }
+        if (type === Array) {
+            return 'array';
+        }
+        if (type === String) {
+            return 'string';
+        }
+        if (type === Number) {
+            return 'number';
+        }
+        if (typeof(type) === 'string') {
+            type = String(type).toLowerCase().trim();
+        }
+        return type;
+    },
+    /**
      * Detect if type hits.
      * @param {*} value - Value to check with.
      * @param {string|object|string[]|object[]} type - Type to check with.
@@ -32,10 +55,10 @@ Argx.prototype = {
         var s = this;
         var isMultiple = Array.isArray(type);
         if (isMultiple) {
-
             return s._anyTypeHits(value, type);
         }
-        var isArrayType = (type === 'array') || (type === Array);
+        type = s._parseType(type);
+        var isArrayType = (type === 'array');
         if (isArrayType) {
             return Array.isArray(value);
         }

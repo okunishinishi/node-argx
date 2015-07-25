@@ -21,15 +21,15 @@ exports['Pop arguments.'] = function (test) {
 
     (function foo2() {
         var args = argx(arguments);
-        test.ok(!args.pop('function'));
-        test.ok(args.pop(1, 'object'));
+        test.strictEqual(args.pop('function'), undefined);
+        test.deepEqual(args.pop(1, 'object'), {foo: 'bar'});
         test.deepEqual(args.remain(), ['v1', 'v2']);
-    })('v1', 'v2', {});
+    })('v1', 'v2', {foo: 'bar'});
 
     (function foo4() {
         var args = argx(arguments);
-        test.ok(!args.pop('function'));
-        test.ok(!args.pop("1", 'object'));
+        test.strictEqual(args.pop('function'), undefined);
+        test.strictEqual(args.pop("1", 'object'), undefined);
         test.deepEqual(args.remain(), ['v1', 'v2']);
     })('v1', 'v2');
 
@@ -166,24 +166,25 @@ exports['Hit with multiple type.'] = function (test) {
     function MyFunc() {
     }
 
+    var myFunc = new MyFunc;
     (function () {
         var args = argx(arguments);
-        test.equal(args._typeHits("foo", "string|number"), true);
-        test.equal(args._typeHits("foo", "string|function"), true);
-        test.equal(args._typeHits("foo", "function|number"), false);
-        test.equal(args._typeHits("foo", ["string", "number"]), true);
-        test.equal(args._typeHits("foo", ["string", "function"]), true);
+        test.equal(args._typeHits("foo", "string|number|object"), true);
+        test.equal(args._typeHits("foo", "string|function|object"), true);
+        test.equal(args._typeHits("foo", "function|number|object"), false);
+        test.equal(args._typeHits("foo", ["string", "number|object"]), true);
+        test.equal(args._typeHits("foo", ["string|object", "function"]), true);
         test.equal(args._typeHits("foo", ["function", "number"]), false);
         test.equal(args._typeHits(new MyFunc, [MyFunc, "number"]), true);
 
-        test.ok(!args.pop('string|number'));
-        test.ok(!args.pop(['string', 'number']));
-        test.ok(!!args.pop([MyFunc, 'number']));
-        test.ok(!args.shift([MyFunc, 'number']));
-        test.ok(!!args.shift(['string', 'number']));
-        test.ok(!!args.shift('string|number'));
+        test.strictEqual(args.pop('string|number'), undefined);
+        test.strictEqual(args.pop(['string', 'number']), undefined);
+        test.strictEqual(args.pop([MyFunc, 'number']), myFunc);
+        test.strictEqual(args.shift([MyFunc, 'number']), undefined);
+        test.strictEqual(args.shift(['string', 'number']), 'v1');
+        test.strictEqual(args.shift('string|number'), 'v2');
 
-    })('v1', 'v2', new MyFunc);
+    })('v1', 'v2', myFunc);
     test.done();
 };
 
@@ -271,5 +272,57 @@ exports['Handle arrays.'] = function (test) {
         var args = argx(arguments);
         test.deepEqual(args.shift(Array), ["foo", "bar"]);
     })(["foo", "bar"]);
+    test.done();
+};
+
+
+exports['Parse type.'] = function (test) {
+    (function () {
+        var args = argx(arguments);
+        test.equal(args._parseType('number'), 'number');
+        test.equal(args._parseType('Number'), 'number');
+        test.equal(args._parseType(' number '), 'number');
+        test.equal(args._parseType(' Number '), 'number');
+        test.equal(args._parseType(Function), 'function');
+        test.equal(args._parseType(String), 'string');
+        test.equal(args._parseType(Array), 'array');
+        test.equal(args._parseType(Number), 'number');
+    })();
+
+    (function () {
+        var args = argx(arguments);
+        test.strictEqual(args.pop(Function), undefined);
+        test.deepEqual(args.pop(Object), {foo: 'bar'});
+        test.strictEqual(args.pop(Function), argx.noop);
+        test.strictEqual(args.shift(Number), undefined);
+        test.equal(args.shift(String), 'foo');
+        test.strictEqual(args.shift(Number), 3);
+    })("foo", 3, argx.noop, {foo: 'bar'});
+    test.done();
+};
+
+exports['Issus #3'] = function (test) {
+    // Test for issue #3 (https://github.com/okunishinishi/node-argx/issues/3)
+    function argxGetNumberType(fn, string, number) {
+        var args = argx(arguments);
+        var values = {};
+        values.fn = args.shift(Function);
+        test.strictEqual(args.shift(Function), undefined);
+        test.strictEqual(args.pop(Function), undefined);
+        values.str = args.shift(String);
+        test.strictEqual(args.shift(String), undefined);
+        test.strictEqual(args.pop(String), undefined);
+        values.numb = args.shift(Number);
+        test.strictEqual(args.shift(Number), undefined);
+        test.strictEqual(args.pop(Number), undefined);
+        test.deepEqual(args.remain(), []);
+        test.deepEqual(values, {
+            fn: argxGetNumberType,
+            str: 'hello',
+            numb: 3
+        })
+    }
+
+    argxGetNumberType(argxGetNumberType, "hello", 3);
     test.done();
 };
