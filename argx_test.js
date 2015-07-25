@@ -253,3 +253,23 @@ exports['Handle array.'] = function (test) {
     );
     test.done();
 };
+
+exports['Handle arrays.'] = function (test) {
+    (function () {
+        var args = argx(arguments);
+        test.deepEqual(args.shift("string"), undefined);
+    })(["foo", "bar"]);
+    (function () {
+        var args = argx(arguments);
+        test.deepEqual(args.shift("array"), ["foo", "bar"]);
+    })(["foo", "bar"]);
+    (function () {
+        var args = argx(arguments);
+        test.deepEqual(args.shift("object"), ["foo", "bar"]);
+    })(["foo", "bar"]);
+    (function () {
+        var args = argx(arguments);
+        test.deepEqual(args.shift(Array), ["foo", "bar"]);
+    })(["foo", "bar"]);
+    test.done();
+};
