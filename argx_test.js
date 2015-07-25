@@ -297,7 +297,9 @@ exports['Parse type.'] = function (test) {
         test.strictEqual(args.shift(Number), undefined);
         test.equal(args.shift(String), 'foo');
         test.strictEqual(args.shift(Number), 3);
-    })("foo", 3, argx.noop, {foo: 'bar'});
+        test.deepEqual(args.shift(Array), ["baz"]);
+        test.strictEqual(args.shift(Array), undefined);
+    })("foo", 3, ["baz"], argx.noop, {foo: 'bar'});
     test.done();
 };
 
