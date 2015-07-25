@@ -16,26 +16,26 @@ exports['Pop arguments.'] = function (test) {
         var args = argx(arguments);
         test.ok(args.pop('function'));
         test.ok(args.pop(1, 'object'));
-        test.equal(args.remain().length, 2);
+        test.deepEqual(args.remain(), ['v1', 'v2']);
     })('v1', 'v2', {}, noop);
 
     (function foo2() {
         var args = argx(arguments);
         test.ok(!args.pop('function'));
         test.ok(args.pop(1, 'object'));
-        test.equal(args.remain().length, 2);
+        test.deepEqual(args.remain(), ['v1', 'v2']);
     })('v1', 'v2', {});
 
     (function foo4() {
         var args = argx(arguments);
         test.ok(!args.pop('function'));
         test.ok(!args.pop("1", 'object'));
-        test.equal(args.remain().length, 2);
+        test.deepEqual(args.remain(), ['v1', 'v2']);
     })('v1', 'v2');
 
     (function foo4() {
         var args = argx(arguments);
-        test.ok(args.pop(2).length, 2);
+        test.deepEqual(args.pop(2), ["v4", "v5"]);
         test.ok(args.remain().length, 2);
     })('v1', 'v2', 'v3', 'v4', 'v5');
 
@@ -45,7 +45,7 @@ exports['Pop arguments.'] = function (test) {
 exports['Shift arguments.'] = function (test) {
     (function foo() {
         var args = argx(arguments);
-        test.equal(args.shift(2).length, 2);
+        test.deepEqual(args.shift(2), ['v1', 'v2']);
         test.equal(args.shift(1, 'function'), undefined);
         test.equal(args.remain().length, 2);
         test.equal(args.shift(), undefined);
@@ -54,7 +54,7 @@ exports['Shift arguments.'] = function (test) {
 
     (function foo2() {
         var args = argx(arguments);
-        test.ok(args.shift(2).length, 2);
+        test.deepEqual(args.shift(2), ['v1', 'v2']);
         test.ok(args.remain().length, 2);
     })('v1', 'v2', 'v3', 'v4', 'v5');
 
@@ -222,6 +222,34 @@ exports['Working with custom object.'] = function (test) {
         },
         new CustomError('err01'),
         {name: 'obj01'}
+    );
+    test.done();
+};
+
+exports['Check is number.'] = function (test) {
+    var args = argx(arguments);
+    test.equal(args._isNumber(0), true);
+    test.equal(args._isNumber("0"), true);
+    test.equal(args._isNumber(""), false);
+    test.equal(args._isNumber([]), false);
+    test.done();
+};
+
+exports['Handle array.'] = function (test) {
+    (function () {
+        var args = argx(arguments);
+        test.ok(!args.pop('string'));
+        test.ok(!args.pop([]));
+        test.ok(args.pop('array'));
+        test.ok(!args.pop([]));
+        test.ok(!args.pop('string'));
+        test.ok(args.pop(Array));
+    })(
+        'v1',
+        'v2',
+        'v3',
+        ['v4', 'v5'],
+        ['v5', 'v6']
     );
     test.done();
 };

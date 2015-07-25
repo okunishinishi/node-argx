@@ -30,9 +30,14 @@ Argx.prototype = {
             return false;
         }
         var s = this;
-        var isArray = Array.isArray(type);
-        if (isArray) {
+        var isMultiple = Array.isArray(type);
+        if (isMultiple) {
+
             return s._anyTypeHits(value, type);
+        }
+        var isArrayType = (type === 'array') || (type === Array);
+        if (isArrayType) {
+            return Array.isArray(value);
         }
         switch (typeof(type)) {
             case 'string':
@@ -77,20 +82,19 @@ Argx.prototype = {
         var s = this;
 
         if (typeof(arguments[1]) !== 'number') {
-            if (isNaN(Number(arguments[1]))) {
+            if (s._isNumber(arguments[1])) {
+                howmany = Number(arguments[1]);
+            } else {
                 type = arguments[1];
                 howmany = 1;
-            } else {
-                howmany = Number(arguments[1]);
             }
         }
-
         howmany = howmany || 1;
         if (start < 0) {
             start += s.values.length;
         }
-        var result;
-        for (var i = start; i < (start + howmany); i++) {
+        var result, hitCount = 0;
+        for (var i = start + howmany - 1; i >= start; i--) {
             var skipByType = type && !s._typeHits(s.values[i], type);
             if (skipByType) {
                 break;
@@ -100,16 +104,40 @@ Argx.prototype = {
                 break;
             }
             spliced = spliced[0];
-            if (result) {
-                if (!Array.isArray(result)) {
-                    result = [result];
-                }
-                result.push(spliced);
-            } else {
-                result = spliced;
+            switch (hitCount) {
+                case 0:
+                    result = spliced;
+                    break;
+                case 1:
+                    result = [spliced, result];
+                    break;
+                default:
+                    result.unshift(spliced);
+                    break;
             }
+            hitCount += 1;
         }
         return result;
+    },
+    /**
+     * Detect is a number or not.
+     * @param {*} value - Value to check.
+     * @returns {boolean} - Is a number or not.
+     * @private
+     */
+    _isNumber: function (value) {
+        var s = this;
+        var notNumber = isNaN(Number(value));
+        if (notNumber) {
+            return false;
+        }
+        return !s._isEmptyString(value) && !s._isEmptyArray(value);
+    },
+    _isEmptyString: function (value) {
+        return value === "";
+    },
+    _isEmptyArray: function (value) {
+        return Array.isArray(value) && (value.length === 0);
     },
     /**
      * Pop values
