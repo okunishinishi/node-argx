@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "argx.js",
   "scripts": {
