@@ -4,11 +4,10 @@
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "argx.js",
   "scripts": {
-    "test": "nodeunit argx_test.js",
-    "cover": "istanbul cover nodeunit argx_test.js --dir coverage",
-    "report": "codeclimate-test-reporter  < coverage/lcov.info",
-    "versionup": "versionup",
-    "taggit": "taggit"
+    "build": "./ci/build.js",
+    "test": "./ci/test.js",
+    "cover": "./ci/cover.js",
+    "report": "./ci/report.js"
   },
   "repository": {
     "type": "git",
@@ -30,11 +29,13 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "devDependencies": {
-    "codeclimate-test-reporter": "0.1.0",
-    "coz": "^1.0.25",
-    "istanbul": "^0.3.17",
-    "nodeunit": "^0.9.1",
-    "taggit": "^1.0.3",
-    "versionup": "^1.0.7"
+    "ape-updating": "^1.0.1",
+    "ape-covering": "^1.0.8",
+    "ape-releasing": "^1.0.14",
+    "ape-reporting": "^1.0.8",
+    "ape-tasking": "^1.0.6",
+    "ape-testing": "^1.1.6",
+    "ape-tmpl": "^1.0.3",
+    "coz": "^1.0.25"
   }
 }
