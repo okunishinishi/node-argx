@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "argx.js",
   "scripts": {
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "devDependencies": {
+    "ape-compiling": "^1.0.0",
     "ape-covering": "^1.0.8",
     "ape-releasing": "^1.0.14",
     "ape-reporting": "^1.0.8",
