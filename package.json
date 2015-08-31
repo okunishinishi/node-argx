@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "argx.js",
   "scripts": {
@@ -38,7 +38,8 @@
     "ape-tmpl": "^1.0.9",
     "ape-updating": "^1.0.1",
     "coz": "^3.0.13",
-    "coz-tmpl": "^1.0.4"
+    "coz-tmpl": "^1.0.4",
+    "extend": "^3.0.0"
   },
   "dependencies": {}
 }

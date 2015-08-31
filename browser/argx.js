@@ -124,7 +124,7 @@ module.exports = Argx;
 /**
  * Parse function arguments. Useful to implement variadic functions.
  * @module argx
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 "use strict";
