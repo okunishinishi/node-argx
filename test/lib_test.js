@@ -6,7 +6,7 @@
 "use strict";
 
 
-var argx = require('./argx');
+var argx = require('../lib');
 
 function noop() {
 }
@@ -66,101 +66,6 @@ exports['Use noop.'] = function (test) {
     test.done();
 };
 
-exports['Check type.'] = function (test) {
-    (function () {
-        var args = argx(arguments);
-        var num1 = 0,
-            str1 = '',
-            str2 = 'foo',
-            obj1 = {},
-            obj2 = Object.create(obj1),
-            Func = function () {
-            },
-            func = new Func();
-
-        // Check numbers
-        test.equal(args._typeHits(num1, 'number'), true);
-        test.equal(args._typeHits(num1, 'string'), false);
-        test.equal(args._typeHits(num1, 'function'), false);
-        test.equal(args._typeHits(num1, 'object'), false);
-        test.equal(args._typeHits(num1, obj1), false);
-        test.equal(args._typeHits(num1, obj2), false);
-        test.equal(args._typeHits(num1, Func), false);
-        test.equal(args._typeHits(num1, null), false);
-        test.equal(args._typeHits(num1, undefined), false);
-
-        // Check empty string.
-        test.equal(args._typeHits(str1, 'number'), false);
-        test.equal(args._typeHits(str1, 'string'), true);
-        test.equal(args._typeHits(str1, 'function'), false);
-        test.equal(args._typeHits(str1, 'object'), false);
-        test.equal(args._typeHits(str1, obj1), false);
-        test.equal(args._typeHits(str1, obj2), false);
-        test.equal(args._typeHits(str1, Func), false);
-        test.equal(args._typeHits(str1, null), false);
-        test.equal(args._typeHits(str1, undefined), false);
-
-        // Check string.
-        test.equal(args._typeHits(str2, 'number'), false);
-        test.equal(args._typeHits(str2, 'string'), true);
-        test.equal(args._typeHits(str2, 'function'), false);
-        test.equal(args._typeHits(str2, 'object'), false);
-        test.equal(args._typeHits(str2, obj1), false);
-        test.equal(args._typeHits(str2, obj2), false);
-        test.equal(args._typeHits(str2, Func), false);
-        test.equal(args._typeHits(str2, null), false);
-        test.equal(args._typeHits(str2, undefined), false);
-
-        // Check object.
-        test.equal(args._typeHits(obj1, 'number'), false);
-        test.equal(args._typeHits(obj1, 'string'), false);
-        test.equal(args._typeHits(obj1, 'function'), false);
-        test.equal(args._typeHits(obj1, 'object'), true);
-        test.equal(args._typeHits(obj1, obj1), false);
-        test.equal(args._typeHits(obj1, obj2), false);
-        test.equal(args._typeHits(obj1, Func), false);
-        test.equal(args._typeHits(obj1, null), false);
-        test.equal(args._typeHits(obj1, undefined), false);
-
-        // Check object inheritance.
-        test.equal(args._typeHits(obj2, 'number'), false);
-        test.equal(args._typeHits(obj2, 'string'), false);
-        test.equal(args._typeHits(obj2, 'function'), false);
-        test.equal(args._typeHits(obj2, 'object'), true);
-        test.equal(args._typeHits(obj2, obj1), true); // Hit by `isPrototypeOf`
-        test.equal(args._typeHits(obj2, obj2), false);
-        test.equal(args._typeHits(obj2, Func), false);
-        test.equal(args._typeHits(obj2, null), false);
-        test.equal(args._typeHits(obj2, undefined), false);
-
-        // Check function.
-        test.equal(args._typeHits(Func, 'number'), false);
-        test.equal(args._typeHits(Func, 'string'), false);
-        test.equal(args._typeHits(Func, 'function'), true);
-        test.equal(args._typeHits(Func, 'object'), false);
-        test.equal(args._typeHits(Func, obj1), false);
-        test.equal(args._typeHits(Func, obj2), false);
-        test.equal(args._typeHits(Func, Func), false);
-        test.equal(args._typeHits(Func, func), false);
-        test.equal(args._typeHits(Func, null), false);
-        test.equal(args._typeHits(Func, undefined), false);
-
-        // Check function inheritance.
-        test.equal(args._typeHits(func, 'number'), false);
-        test.equal(args._typeHits(func, 'string'), false);
-        test.equal(args._typeHits(func, 'function'), false);
-        test.equal(args._typeHits(func, 'object'), true);
-        test.equal(args._typeHits(func, obj1), false);
-        test.equal(args._typeHits(func, obj2), false);
-        test.equal(args._typeHits(func, Func), true); // Hit by `instanceof`
-        test.equal(args._typeHits(func, func), false);
-        test.equal(args._typeHits(func, null), false);
-        test.equal(args._typeHits(func, undefined), false);
-
-
-    })();
-    test.done();
-};
 
 exports['Hit with multiple type.'] = function (test) {
     function MyFunc() {
@@ -169,13 +74,6 @@ exports['Hit with multiple type.'] = function (test) {
     var myFunc = new MyFunc;
     (function () {
         var args = argx(arguments);
-        test.equal(args._typeHits("foo", "string|number|object"), true);
-        test.equal(args._typeHits("foo", "string|function|object"), true);
-        test.equal(args._typeHits("foo", "function|number|object"), false);
-        test.equal(args._typeHits("foo", ["string", "number|object"]), true);
-        test.equal(args._typeHits("foo", ["string|object", "function"]), true);
-        test.equal(args._typeHits("foo", ["function", "number"]), false);
-        test.equal(args._typeHits(new MyFunc, [MyFunc, "number"]), true);
 
         test.strictEqual(args.pop('string|number'), undefined);
         test.strictEqual(args.pop(['string', 'number']), undefined);
@@ -227,15 +125,6 @@ exports['Working with custom object.'] = function (test) {
     test.done();
 };
 
-exports['Check is number.'] = function (test) {
-    var args = argx(arguments);
-    test.equal(args._isNumber(0), true);
-    test.equal(args._isNumber("0"), true);
-    test.equal(args._isNumber(""), false);
-    test.equal(args._isNumber([]), false);
-    test.done();
-};
-
 exports['Handle array.'] = function (test) {
     (function () {
         var args = argx(arguments);
@@ -277,17 +166,6 @@ exports['Handle arrays.'] = function (test) {
 
 
 exports['Parse type.'] = function (test) {
-    (function () {
-        var args = argx(arguments);
-        test.equal(args._parseType('number'), 'number');
-        test.equal(args._parseType('Number'), 'number');
-        test.equal(args._parseType(' number '), 'number');
-        test.equal(args._parseType(' Number '), 'number');
-        test.equal(args._parseType(Function), 'function');
-        test.equal(args._parseType(String), 'string');
-        test.equal(args._parseType(Array), 'array');
-        test.equal(args._parseType(Number), 'number');
-    })();
 
     (function () {
         var args = argx(arguments);
