@@ -4,31 +4,12 @@
 
 "use strict";
 
-var extend = require('extend'),
+var apeTmpl = require('ape-tmpl'),
     pkg = require('./package.json');
 
-module.exports = {
-    force: true,
-    mode: '444',
-    data: extend({
-        "name": pkg.name,
-	"description": pkg.description,
-        "version": pkg.version,
-        "homepage": pkg.homepage,
-        "authors": [
-            pkg.author.name
-        ],
-        "main": 'browser/argx.js',
-        "license": pkg.license,
-        "ignore": [
-            "**/.*",
-            "node_modules",
-            "bower_components",
-            "test"
-        ]
-    }),
-    tmpl: 'json'
-};
+module.exports = apeTmpl.bowerJsonBud({
+    pkg: pkg
+});
 
 if (!module.parent) {
     require('coz').render(__filename);

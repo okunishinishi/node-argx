@@ -22,7 +22,7 @@ apeTasking.runTasks('build', [
     },
     function browsify(callback) {
         var src = require.resolve('../lib'),
-            dest = 'browser/argx.js';
+            dest = require('../bower.json')['main'];
         apeCompiling.renderBrowserScript(src, dest, {
             as: 'argx'
         }, callback);
