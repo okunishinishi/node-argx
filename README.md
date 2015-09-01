@@ -8,6 +8,7 @@ argx
 [![Code Climate][bd_codeclimate_shield_url]][bd_codeclimate_url]
 [![Code Coverage][bd_codeclimate_coverage_shield_url]][bd_codeclimate_url]
 [![npm Version][bd_npm_shield_url]][bd_npm_url]
+[![bower version][bd_bower_badge_url]][bd_repo_url]
 
 [bd_repo_url]: https://github.com/okunishinishi/node-argx
 [bd_travis_url]: http://travis-ci.org/okunishinishi/node-argx
@@ -20,6 +21,7 @@ argx
 [bd_gemnasium_shield_url]: https://gemnasium.com/okunishinishi/node-argx.svg
 [bd_npm_url]: http://www.npmjs.org/package/argx
 [bd_npm_shield_url]: http://img.shields.io/npm/v/argx.svg?style=flat
+[bd_bower_badge_url]: https://img.shields.io/bower/v/argx.svg?style=flat
 
 <!-- Badge End -->
 

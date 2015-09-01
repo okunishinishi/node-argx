@@ -16,7 +16,8 @@ module.exports = apeTmpl.readmeMdBud({
         codeclimate: true,
         codeclimateCoverage: true,
         gemnasium: false,
-        npm: true
+        npm: true,
+        bower: true
     },
     links: null
 });
