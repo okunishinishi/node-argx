@@ -18,7 +18,7 @@ module.exports = {
         "authors": [
             pkg.author.name
         ],
-        "main": 'browser/argx',
+        "main": 'browser/argx.js',
         "license": pkg.license,
         "ignore": [
             "**/.*",
