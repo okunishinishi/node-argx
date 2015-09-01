@@ -1,11 +1,12 @@
 {
     "name": "argx",
-    "version": "1.2.3",
+    "description": "Parse function arguments. Useful to implement variadic functions.",
+    "version": "1.2.4",
     "homepage": "https://github.com/okunishinishi/node-argx#readme",
     "authors": [
         "Taka Okunishi"
     ],
-    "main": "browser/argx",
+    "main": "browser/argx.js",
     "license": "MIT",
     "ignore": [
         "**/.*",

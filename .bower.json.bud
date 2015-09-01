@@ -12,12 +12,13 @@ module.exports = {
     mode: '444',
     data: extend({
         "name": pkg.name,
+	"description": pkg.description,
         "version": pkg.version,
         "homepage": pkg.homepage,
         "authors": [
             pkg.author.name
         ],
-        "main": 'browser/argx',
+        "main": 'browser/argx.js',
         "license": pkg.license,
         "ignore": [
             "**/.*",

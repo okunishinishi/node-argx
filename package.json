@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "lib",
   "scripts": {
