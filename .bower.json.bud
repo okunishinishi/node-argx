@@ -12,6 +12,7 @@ module.exports = {
     mode: '444',
     data: extend({
         "name": pkg.name,
+	"description": pkg.description,
         "version": pkg.version,
         "homepage": pkg.homepage,
         "authors": [
