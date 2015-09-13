@@ -1,7 +1,7 @@
 {
   "name": "argx",
   "description": "Parse function arguments. Useful to implement variadic functions.",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "authors": [
     "Taka Okunishi"

@@ -39,20 +39,20 @@ Parse function arguments. Useful to implement variadic functions.
 <!-- Sections Start -->
 <a name="sections"></a>
 
-<!-- Section from "docs/readme/01.Installation.md.hbs" Start -->
+<!-- Section from "doc/readme/01.Installation.md.hbs" Start -->
 
-<a name="section-docs-readme-01-installation-md"></a>
+<a name="section-doc-readme-01-installation-md"></a>
 Installation
 -----
 
 ```bash
 npm install argx --save
 ```
-<!-- Section from "docs/readme/01.Installation.md.hbs" End -->
+<!-- Section from "doc/readme/01.Installation.md.hbs" End -->
 
-<!-- Section from "docs/readme/02.Usage.md.hbs" Start -->
+<!-- Section from "doc/readme/02.Usage.md.hbs" Start -->
 
-<a name="section-docs-readme-02-usage-md"></a>
+<a name="section-doc-readme-02-usage-md"></a>
 Usage
 -----
 
@@ -79,11 +79,11 @@ doSomething('foo', 'bar', function(err){});
 doSomething('foo', 'bar', {verbose:true}, function(err){});
 ````
 
-<!-- Section from "docs/readme/02.Usage.md.hbs" End -->
+<!-- Section from "doc/readme/02.Usage.md.hbs" End -->
 
-<!-- Section from "docs/readme/03.API Guide.md.hbs" Start -->
+<!-- Section from "doc/readme/03.API Guide.md.hbs" Start -->
 
-<a name="section-docs-readme-03-a-p-i-guide-md"></a>
+<a name="section-doc-readme-03-a-p-i-guide-md"></a>
 API Guide
 -----
 
@@ -101,11 +101,11 @@ API guide for Argx instance, which is returned by `argx(arguments)`.
 | **.shift(count, type)** | Shift values while conforming the type. | args.shift(2, "string") <br/> args.shift(4, CustomObj) |
 | **.remain()** | Shift all remained values. Always returns an array. | args.remain() |
 
-<!-- Section from "docs/readme/03.API Guide.md.hbs" End -->
+<!-- Section from "doc/readme/03.API Guide.md.hbs" End -->
 
-<!-- Section from "docs/readme/04.Tips.md.hbs" Start -->
+<!-- Section from "doc/readme/04.Tips.md.hbs" Start -->
 
-<a name="section-docs-readme-04-tips-md"></a>
+<a name="section-doc-readme-04-tips-md"></a>
 Tips
 -----
 
@@ -139,7 +139,7 @@ var args = argx(arguments);
 var values = [].concat(args.pop(2, 'string') || []); // Always array.
 ```
 
-<!-- Section from "docs/readme/04.Tips.md.hbs" End -->
+<!-- Section from "doc/readme/04.Tips.md.hbs" End -->
 
 
 <!-- Sections Start -->

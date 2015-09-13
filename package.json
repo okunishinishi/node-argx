@@ -1,18 +1,12 @@
 {
   "name": "argx",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "lib",
   "scripts": {
-    "build": "./ci/build.js",
-    "test": "./ci/test.js",
-    "cover": "./ci/cover.js",
-    "report": "./ci/report.js"
+    "test": "./ci/test.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/okunishinishi/node-argx.git"
-  },
+  "repository": "okunishinishi/node-argx",
   "keywords": [
     "function",
     "arguments",
@@ -31,13 +25,13 @@
   "devDependencies": {
     "ape-compiling": "^1.0.3",
     "ape-covering": "^1.0.8",
-    "ape-releasing": "^1.0.14",
-    "ape-reporting": "^1.0.8",
+    "ape-releasing": "^1.0.16",
+    "ape-reporting": "^1.0.9",
     "ape-tasking": "^1.0.7",
     "ape-testing": "^1.3.2",
-    "ape-tmpl": "^1.1.0",
+    "ape-tmpl": "^1.3.3",
     "ape-updating": "^1.0.1",
-    "coz": "^3.0.13",
+    "coz": "^3.0.15",
     "coz-tmpl": "^1.0.4"
   },
   "dependencies": {}
