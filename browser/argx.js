@@ -9,7 +9,7 @@ window.argx = require("../lib/index.js");
 
 "use strict";
 
-var typeHits = require('./type/type_hits'),
+var iftype = require('iftype'),
     isNumber = require('./type/is_number');
 
 /** @lends constructor */
@@ -42,7 +42,7 @@ Argx.prototype = {
         }
         var result, hitCount = 0;
         for (var i = start + howmany - 1; i >= start; i--) {
-            var skipByType = type && !typeHits(s.values[i], type);
+            var skipByType = type && !iftype(s.values[i]).is(type);
             if (skipByType) {
                 break;
             }
@@ -120,11 +120,11 @@ Argx.prototype = {
 
 module.exports = Argx;
 
-},{"./type/is_number":5,"./type/type_hits":7}],3:[function(require,module,exports){
+},{"./type/is_number":5,"iftype":8}],3:[function(require,module,exports){
 /**
  * Parse function arguments. Useful to implement variadic functions.
  * @module argx
- * @version 1.3.0
+ * @version 1.3.1
  */
 
 "use strict";
@@ -192,15 +192,158 @@ function _isEmptyArray(value) {
 module.exports = _isNumber;
 },{}],6:[function(require,module,exports){
 /**
+ * Create an instance.
+ * @function create
+ * @returns {Iftype} - Created instance.
+ */
+
+"use strict";
+
+var IfType = require('./iftype');
+
+/** @lends create */
+function create(val) {
+    return new IfType(val);
+}
+
+module.exports = create;
+
+},{"./iftype":7}],7:[function(require,module,exports){
+/**
+ * Type check instance.
+ * @constructor Iftype
+ * @param {*} value - Value to check.
+ */
+
+"use strict";
+
+var is = require('./is');
+
+/** @lends Iftype */
+function Iftype(val) {
+    var s = this;
+    s.val(val);
+}
+
+Iftype.prototype = {
+    /**
+     * Detect type matches.
+     * @param {string} type
+     * @returns {boolean} - Type matches or not.
+     */
+    is: function typeIs(type) {
+        var s = this;
+        return is(type, s.val());
+    },
+    /**
+     * Detect if string.
+     * @returns {boolean} - Type matches or not.
+     */
+    isString: function isStringType() {
+        var s = this;
+        return s.is('string');
+    },
+    /**
+     * Detect if number.
+     * @returns {boolean} - Type matches or not.
+     */
+    isNumber: function isNumberType() {
+        var s = this;
+        return s.is('number');
+    },
+    /**
+     * Detect if object.
+     * @returns {boolean} - Type matches or not.
+     */
+    isObject: function isObjectType() {
+        var s = this;
+        return s.is('object');
+    },
+    /**
+     * Detect if array.
+     * @returns {boolean} - Type matches or not.
+     */
+    isArray: function isArrayType() {
+        var s = this;
+        return s.is('array');
+    },
+    /**
+     * Detect if function.
+     * @returns {boolean} - Type matches or not.
+     */
+    isFunction: function isFunctionType() {
+        var s = this;
+        return s.is('function');
+    },
+    val: function(val){
+        var s = this;
+        if (arguments.length === 0) {
+            return s._val;
+        }
+        s._val = val;
+        return s;
+    }
+};
+
+module.exports = Iftype;
+
+},{"./is":9}],8:[function(require,module,exports){
+/**
+ * Check types
+ * @module iftype
+ * @version 1.1.0
+ */
+
+"use strict";
+
+var IfType = require('./iftype'),
+    is = require('./is'),
+    create = require('./create');
+
+var lib = create.bind();
+lib.create = create;
+lib.IfType = IfType;
+
+lib.is = is;
+lib.isString = is.bind('string');
+lib.isNumber = is.bind('number');
+lib.isObject = is.bind('object');
+lib.isArray = is.bind('array');
+lib.isFunction = is.bind('function');
+
+module.exports = lib;
+
+},{"./create":6,"./iftype":7,"./is":9}],9:[function(require,module,exports){
+/**
+ * @function is
+ * @param {string} type
+ * @param {val}
+ */
+
+"use strict";
+
+var typeHits = require('./type/type_hits');
+
+/** @lends is */
+function is(type, val) {
+    return typeHits(val, type);
+}
+
+module.exports = is;
+
+},{"./type/type_hits":11}],10:[function(require,module,exports){
+/**
  * Parse a type.
+ * @memberof module:iftype/lib/type
+ * @function parseType
  * @param {string|object|function} type - Type to parse.
  * @private
  */
 
 "use strict";
 
-/** @lends _parseType */
-function _parseType(type) {
+/** @lends parseType */
+function parseType(type) {
     if (type === Function) {
         return 'function';
     }
@@ -219,10 +362,11 @@ function _parseType(type) {
     return type;
 }
 
-module.exports = _parseType;
-},{}],7:[function(require,module,exports){
+module.exports = parseType;
+},{}],11:[function(require,module,exports){
 /**
  * Detect if type hits.
+ * @memberof module:iftype/lib/type
  * @function typeHits
  * @param {*} value - Value to check with.
  * @param {string|object|string[]|object[]} type - Type to check with.
@@ -283,4 +427,4 @@ typeHits.anyOf = function anyOfTypeHits(value, types) {
 };
 
 module.exports = typeHits;
-},{"./parse_type":6}]},{},[1]);
+},{"./parse_type":10}]},{},[1]);
