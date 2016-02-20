@@ -1,11 +1,12 @@
 /**
  * This an example to declare an variadic functions.
  */
+"use strict";
 
-var argx = require('argx');
+const argx = require('argx');
 
 function doSomething(values, options, callback) {
-    var args = argx(arguments);
+    let args = argx(arguments);
     callback = args.pop('function') || function noop(){}; // Consume last argument if it's a function.
     options = args.pop('object') || {}; // Consume last argument if it's an object.
     values = args.remain(); // Get remaining arguments as array.

@@ -1,23 +1,20 @@
 /**
  * Test case for isNumber.
- * Runs with nodeunit.
+ * Runs with mocha.
  */
+"use strict";
 
-var isNumber = require('../lib/type/is_number.js');
+const isNumber = require('../lib/type/is_number.js'),
+    assert = require('assert');
 
-exports.setUp = function(done) {
-    done();
-};
+describe('isNumber', () => {
 
-exports.tearDown = function(done) {
-    done();
-};
-
-exports['Is number'] = function(test){
-    test.equal(isNumber(0), true);
-    test.equal(isNumber("0"), true);
-    test.equal(isNumber(""), false);
-    test.equal(isNumber([]), false);
-    test.done();
-};
+    it('Is number', (done) => {
+        assert.equal(isNumber(0), true);
+        assert.equal(isNumber("0"), true);
+        assert.equal(isNumber(""), false);
+        assert.equal(isNumber([]), false);
+        done();
+    });
+});
 

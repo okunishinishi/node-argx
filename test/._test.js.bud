@@ -4,9 +4,9 @@
 
 "use strict";
 
-var cozTmpl = require('coz-tmpl');
+const apeTmpl = require('ape-tmpl');
 
-module.exports = cozTmpl.nodeunitTestJsBud({
+module.exports = apeTmpl.mochaTestJsBud({
     src: __dirname + '/../lib/**/*.js',
     dest: __dirname
 });

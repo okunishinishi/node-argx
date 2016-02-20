@@ -1,20 +1,25 @@
 /**
  * Test case for argx.
- * Runs with nodeunit.
+ * Runs with mocha.
  */
+"use strict";
 
-var argx = require('../lib/argx.js');
+const argx = require('../lib/argx.js'),
+    assert = require('assert');
 
-exports.setUp = function(done) {
-    done();
-};
+describe('argx', () => {
 
-exports.tearDown = function(done) {
-    done();
-};
+    before((done) => {
+        done();
+    });
 
-exports['Argx'] = function(test){
+    after((done) => {
+        done();
+    });
 
-    test.done();
-};
+
+    it('Argx', (done) => {
+        done();
+    });
+});
 

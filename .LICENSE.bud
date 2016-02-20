@@ -4,7 +4,7 @@
 
 "use strict";
 
-var apeTmpl = require('ape-tmpl'),
+const apeTmpl = require('ape-tmpl'),
     pkg = require('./package.json');
 
 module.exports = apeTmpl.licenseBud({

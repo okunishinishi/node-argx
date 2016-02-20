@@ -1,20 +1,25 @@
 /**
  * Test case for noop.
- * Runs with nodeunit.
+ * Runs with mocha.
  */
+"use strict";
 
-var noop = require('../lib/noop.js');
+const noop = require('../lib/noop.js'),
+    assert = require('assert');
 
-exports.setUp = function(done) {
-    done();
-};
+describe('noop', () => {
 
-exports.tearDown = function(done) {
-    done();
-};
+    before((done) => {
+        done();
+    });
 
-exports['Noop'] = function(test){
-    noop();
-    test.done();
-};
+    after((done) => {
+        done();
+    });
+
+
+    it('Noop', (done) => {
+        done();
+    });
+});
 

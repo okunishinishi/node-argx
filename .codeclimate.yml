@@ -1,6 +1,13 @@
-languages:
-  JavaScript: true
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+ratings:
+  paths:
+  - lib/**
 exclude_paths:
-  - "browser/*.js"
-  - "ci/*.js"
-  - "docs/*.js"
+- ci/**/*
+- example/**/*
+- doc/**/*
+- test/**/*

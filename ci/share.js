@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Update project.
+ * Share this project.
  */
 
 "use strict";
@@ -9,10 +9,10 @@
 process.chdir(__dirname + '/..');
 
 const apeTasking = require('ape-tasking'),
-    apeUpdating = require('ape-updating');
+    sharegit = require('sharegit');
 
-apeTasking.runTasks('update', [
+apeTasking.runTasks('share', [
     (callback) => {
-        apeUpdating.updateDependencies({}, callback);
+        sharegit(callback);
     }
 ], true);
