@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "lib",
   "scripts": {
@@ -23,19 +23,19 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "devDependencies": {
-    "ape-compiling": "^3.3.2",
+    "ape-compiling": "^3.4.0",
     "ape-covering": "^2.0.2",
     "ape-releasing": "^2.0.1",
     "ape-reporting": "^2.0.3",
     "ape-tasking": "^2.0.2",
-    "ape-testing": "^2.0.0",
+    "ape-testing": "^2.0.1",
     "ape-tmpl": "^2.0.10",
     "ape-updating": "^2.0.3",
-    "coz": "^4.0.2",
-    "coz-tmpl": "^1.1.0"
+    "coz": "^4.0.3",
+    "coz-tmpl": "^1.2.0"
   },
   "dependencies": {
-    "iftype": "^2.0.1"
+    "iftype": "^2.0.3"
   },
   "engines": {
     "node": ">=4.0.0"
