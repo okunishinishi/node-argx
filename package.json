@@ -1,10 +1,12 @@
 {
   "name": "argx",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "lib",
+  "browser": "shim/browser",
   "scripts": {
-    "test": "./ci/test.js"
+    "test": "./ci/test.js",
+    "prepublish": "./ci/build.js && ./ci/browser.js"
   },
   "repository": "okunishinishi/node-argx",
   "keywords": [
@@ -22,22 +24,23 @@
     "url": "https://github.com/okunishinishi/node-argx/issues"
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
-  "devDependencies": {
-    "ape-compiling": "^3.4.0",
-    "ape-covering": "^2.0.2",
-    "ape-releasing": "^2.0.1",
-    "ape-reporting": "^2.0.3",
-    "ape-tasking": "^2.0.2",
-    "ape-testing": "^2.0.1",
-    "ape-tmpl": "^2.0.10",
-    "ape-updating": "^2.0.3",
-    "coz": "^4.0.3",
-    "coz-tmpl": "^1.2.0"
-  },
   "dependencies": {
-    "iftype": "^2.0.3"
+    "iftype": "^3.0.0"
+  },
+  "devDependencies": {
+    "ababel": "^1.0.25",
+    "ababel-es2015": "^1.0.5",
+    "amocha": "^1.0.9",
+    "ape-covering": "^3.0.4",
+    "ape-releasing": "^4.0.2",
+    "ape-reporting": "^3.0.1",
+    "ape-tasking": "^4.0.7",
+    "ape-tmpl": "^5.0.14",
+    "ape-updating": "^4.0.4",
+    "coz": "^6.0.14"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6",
+    "npm": ">=3"
   }
 }

@@ -2,24 +2,23 @@
  * Test case for noop.
  * Runs with mocha.
  */
-"use strict";
+'use strict'
 
-const noop = require('../lib/noop.js'),
-    assert = require('assert');
+const noop = require('../lib/noop.js')
+const assert = require('assert')
 
 describe('noop', () => {
+  before((done) => {
+    done()
+  })
 
-    before((done) => {
-        done();
-    });
+  after((done) => {
+    done()
+  })
 
-    after((done) => {
-        done();
-    });
+  it('Noop', (done) => {
+    done()
+  })
+})
 
-
-    it('Noop', (done) => {
-        done();
-    });
-});
-
+/* global describe, before, after, it */

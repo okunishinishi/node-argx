@@ -4,10 +4,10 @@
  * @version {{pkg.version}}
  */
 
-"use strict";
+'use strict'
 
 const Argx = require('./argx'),
-    noop = require('./noop');
+    noop = require('./noop')
 
 /**
  * Get value from arguments.
@@ -15,7 +15,7 @@ const Argx = require('./argx'),
  * @returns {Argx} - Parser object.
  */
 function argx(args) {
-    return new Argx(args);
+    return new Argx(args)
 }
 
 argx.noop = noop;

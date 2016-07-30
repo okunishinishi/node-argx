@@ -1,12 +1,8 @@
 language: node_js
 node_js:
-- '4.0'
-before_install:
-- npm install mocha istanbul -g
+- '6'
 install:
 - npm install
-before_script:
-- npm link .
 script:
 - ./ci/build.js
 - ./ci/test.js
