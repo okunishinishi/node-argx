@@ -203,7 +203,7 @@ describe('lib', () => {
     done()
   })
 
-  it('Issus #3', (done) => {
+  it('Issue #3', (done) => {
     // Test for issue #3 (https://github.com/okunishinishi/node-argx/issues/3)
     function argxGetNumberType (fn, string, number) {
       let args = argx(arguments)
