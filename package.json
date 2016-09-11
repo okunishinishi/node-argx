@@ -2,11 +2,11 @@
   "name": "argx",
   "version": "3.0.2",
   "description": "Parse function arguments. Useful to implement variadic functions.",
-  "main": "lib",
+  "main": "shim/node",
   "browser": "shim/browser",
   "scripts": {
-    "test": "./ci/test.js",
-    "prepublish": "./ci/build.js && ./ci/browser.js"
+    "test": "node ./ci/test.js",
+    "prepublish": "node ./ci/build.js && node ./ci/shim.js"
   },
   "repository": "okunishinishi/node-argx",
   "keywords": [
@@ -40,7 +40,7 @@
     "coz": "^6.0.14"
   },
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": ">=4",
+    "npm": ">=2"
   }
 }
