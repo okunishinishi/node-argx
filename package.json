@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "shim/node",
   "browser": "shim/browser",
