@@ -1,8 +1,8 @@
 {
   "name": "argx",
-  "version": "3.0.3",
+  "version": "4.0.1",
   "description": "Parse function arguments. Useful to implement variadic functions.",
-  "main": "shim/node",
+  "main": "lib",
   "browser": "shim/browser",
   "scripts": {
     "test": "node ./ci/test.js",
@@ -25,22 +25,19 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "dependencies": {
-    "iftype": "^3.0.0"
+    "iftype": "^4.0.1"
   },
   "devDependencies": {
-    "ababel": "^1.0.25",
-    "ababel-es2015": "^1.0.5",
-    "amocha": "^1.0.9",
-    "ape-covering": "^3.0.4",
-    "ape-releasing": "^4.0.2",
-    "ape-reporting": "^3.0.1",
+    "ababel": "^5.0.9",
+    "amocha": "^5.0.0",
+    "ape-releasing": "^5.0.0",
     "ape-tasking": "^4.0.7",
-    "ape-tmpl": "^5.0.14",
-    "ape-updating": "^4.0.4",
-    "coz": "^6.0.14"
+    "ape-tmpl": "^6.0.12",
+    "ape-updating": "^5.0.1",
+    "coz": "^7.0.8"
   },
   "engines": {
-    "node": ">=4",
-    "npm": ">=2"
+    "node": ">=8",
+    "npm": ">=5"
   }
 }
