@@ -25,16 +25,16 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "dependencies": {
-    "iftype": "^4.0.1"
+    "iftype": "^4.0.5"
   },
   "devDependencies": {
-    "ababel": "^5.0.9",
-    "amocha": "^5.0.0",
-    "ape-releasing": "^5.0.0",
-    "ape-tasking": "^4.0.7",
-    "ape-tmpl": "^6.0.12",
-    "ape-updating": "^5.0.1",
-    "coz": "^7.0.8"
+    "ababel": "^6.0.0",
+    "amocha": "^6.0.0",
+    "ape-releasing": "^5.0.7",
+    "ape-tasking": "^4.0.12",
+    "ape-tmpl": "^6.0.14",
+    "ape-updating": "^5.0.3",
+    "coz": "^7.0.19"
   },
   "engines": {
     "node": ">=8",

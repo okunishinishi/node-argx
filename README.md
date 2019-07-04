@@ -94,7 +94,7 @@ doSomething('foo', 'bar', { verbose: true }, (err) => {})
 
 <!-- Section from "doc/guides/03.API Guide.md.hbs" Start -->
 
-<a name="section-doc-guides-03-a-p-i-guide-md"></a>
+<a name="section-doc-guides-03-api-guide-md"></a>
 
 API Guide
 -----
