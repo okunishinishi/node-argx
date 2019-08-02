@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "4.0.2",
+  "version": "4.0.4",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "lib",
   "browser": "shim/browser",
@@ -25,10 +25,10 @@
   },
   "homepage": "https://github.com/okunishinishi/node-argx#readme",
   "dependencies": {
-    "iftype": "^4.0.5"
+    "iftype": "^4.0.9"
   },
   "devDependencies": {
-    "ababel": "^6.0.0",
+    "ababel": "^6.0.3",
     "amocha": "^6.0.0",
     "ape-releasing": "^5.0.7",
     "ape-tasking": "^4.0.12",
