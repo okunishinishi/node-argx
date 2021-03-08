@@ -1,6 +1,6 @@
 {
   "name": "argx",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Parse function arguments. Useful to implement variadic functions.",
   "main": "lib",
   "browser": "shim/browser",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "ababel": "^6.0.3",
-    "amocha": "^6.0.0",
+    "amocha": "^7.1.1",
     "ape-releasing": "^5.0.7",
     "ape-tasking": "^4.0.12",
     "ape-tmpl": "^6.0.14",
